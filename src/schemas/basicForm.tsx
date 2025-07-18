@@ -8,7 +8,7 @@ export const basicForm = (): IJSON => ({
       name: "heading",
       element: "text",
       label: "Dynamic Form Example - Basic",
-      className: "text-xl font-semibold my-2 col-span-full",
+      className: "text-lg font-medium pb-4 col-span-full border-b",
     },
     {
       name: "full_name",
@@ -96,7 +96,7 @@ export const basicForm = (): IJSON => ({
       required: true,
       rows: 4,
       placeholder: "Eg: Kondapur, Hyderabad",
-      containerClassName: "col-span-full",
+      containerClassName: "col-span-full border-b pb-4",
     },
     {
       name: "empty",

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Builder from "./components/Builder";
 import { basicForm } from "./schemas/basicForm";
+import { nestedForm } from "./schemas/nestedForm";
 import { IFormTypes } from "./utils/types";
 const FORMTYPES: IFormTypes[] = [
   { value: "basic", label: "Basic" },
@@ -10,6 +11,7 @@ const FORMTYPES: IFormTypes[] = [
 function App() {
   const [active, setActive] = useState<string>(FORMTYPES[0].value);
   const BASICFORM = basicForm();
+  const NESTEDFORM = nestedForm();
   return (
     <div className="w-full p-6">
       {FORMTYPES.map((type) => {
@@ -24,7 +26,7 @@ function App() {
         );
       })}
       {active === "basic" && <Builder json={BASICFORM} />}
-      {active === "nested" && <Builder json={BASICFORM} />}
+      {active === "nested" && <Builder json={NESTEDFORM} />}
     </div>
   );
 }

@@ -5,6 +5,7 @@ export interface IFormTypes {
 
 export type IElements =
   | "button"
+  | "div"
   | "input"
   | "password"
   | "radio"
@@ -24,6 +25,10 @@ export interface ILabel {
   className?: string;
   required?: boolean;
 }
+
+export interface IDiv extends IBase{
+  fields: IField[]
+}
 export interface IText extends IBase {
   element: "text";
   label?: string;
@@ -36,7 +41,7 @@ export interface IButton extends IBase {
 }
 export interface IInput extends IBase {
   element: "input";
-  type?: "text" | "number" | "email" | "date" | "tel";
+  type?: "text" | "number" | "email" | "date" | "tel" | undefined;
   label?: string;
   value?: string | number;
   placeholder?: string;
@@ -90,6 +95,7 @@ export interface ISingleSelect extends IBase {
 
 export type IField =
   | IButton
+  | IDiv
   | IInput
   | IPassword
   | IRadio
