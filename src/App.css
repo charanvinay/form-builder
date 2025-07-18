@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root{
+    --primary: #166BD9;
+    --primary-bg: #ECF2F7
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+    background-color: var(--primary-bg);
+    font-family: 'Poppins', sans-serif;
 }
+@layer base {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="date"],
+  input[type="number"],
+  select,
+  textarea {
+    @apply w-full border border-gray-300 rounded outline-none px-3 py-2 text-sm focus:ring-1 focus:ring-primary focus:rounded-sm;
+  }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  input[type="checkbox"] {
+    @apply text-blue-600 focus:ring-primary focus:outline-none;
+  }
+
+  select {
+    @apply bg-white appearance-none;
+  }
+
+  select:invalid{
+    @apply text-gray-50
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    @apply text-gray-400 text-xs;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@layer components {
+  .btn-form-type {
+    @apply px-6 py-2 text-sm font-medium rounded-md rounded-b-none transition-colors duration-200 mr-1 text-primary hover:bg-primary/5;
+  }
+
+  .btn-form-type.active {
+    @apply bg-primary text-white border-primary;
+  }
+
+  .btn {
+    @apply p-2 px-3 text-sm font-medium rounded;
+
+    &.submit {
+        @apply bg-primary text-white hover:bg-primary/90;
+    }
+
+    &.reset {
+        @apply bg-red-600 text-white hover:bg-red-700;
+    }
+  }
+
+  .radio-btn {
+    @apply hidden;
+  }
+
+  .radio-label {
+    @apply inline-block px-4 py-2 rounded-full border text-xs font-medium cursor-pointer transition-colors duration-200 text-primary border-primary bg-white hover:bg-primary/10;
+  }
+
+  .radio-btn:checked + .radio-label {
+    @apply bg-primary text-white;
+  }
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
