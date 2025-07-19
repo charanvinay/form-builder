@@ -15,6 +15,7 @@ import Label from "./Label";
 import Radio from "./Radio";
 import SingleSelect from "./SingleSelect";
 import TextArea from "./TextArea";
+import { Utils } from "../utils";
 
 const Builder = (props: IBuilder) => {
   const { json } = props;
@@ -26,29 +27,13 @@ const Builder = (props: IBuilder) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const validateForm = () => {
-    let inValidLabel: string | undefined = "";
-
-    for (const field of json.fields) {
-      if (!["text", "div"].includes(field.element)) {
-        if (field.required) {
-          const value = formData[field.name];
-          if (!Boolean(value)) {
-            inValidLabel = field?.label || "";
-            break;
-          }
-        }
-      }
-    }
-
-    return inValidLabel;
-  };
+  
 
   const handleButtonClick = (type?: "submit" | "reset") => {
     if (type === "reset") {
       setFormData({});
     } else if (type === "submit") {
-      const inValidLabel = validateForm();
+      const inValidLabel = Utils.validateForm({ json, formData });
       if (inValidLabel) {
         alert(`${inValidLabel} required`);
       } else {
