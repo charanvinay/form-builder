@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  IAddMoreTable,
   IBuilder,
   IButton,
   IDiv,
@@ -16,6 +17,7 @@ import Radio from "./Radio";
 import SingleSelect from "./SingleSelect";
 import TextArea from "./TextArea";
 import { Utils } from "../utils";
+import AddMoreTable from "./AddMoreTable";
 
 const Builder = (props: IBuilder) => {
   const { json } = props;
@@ -26,8 +28,6 @@ const Builder = (props: IBuilder) => {
   ) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
-  
 
   const handleButtonClick = (type?: "submit" | "reset") => {
     if (type === "reset") {
@@ -44,7 +44,24 @@ const Builder = (props: IBuilder) => {
   };
 
   const renderElement = (field: IField) => {
-    if (field.element === "button") {
+    const visible = field?.visibilityCondition
+      ? Utils.jsCodeExecutor({
+          code: field?.visibilityCondition || "",
+          state: formData,
+        })
+      : true;
+    if (!visible) return <React.Fragment key={field.name}></React.Fragment>;
+    if (field.element === "add-more-table") {
+      const node = field as IAddMoreTable;
+      return (
+        <AddMoreTable
+          {...node}
+          key={field.name}
+          tbody={formData[node?.name] || ""}
+          onChange={(value) => handleChange(node.name, value)}
+        />
+      );
+    } else if (field.element === "button") {
       const node = field as IButton;
       return (
         <Button
@@ -110,7 +127,7 @@ const Builder = (props: IBuilder) => {
     fields.map(renderElement);
 
   return (
-    <div className="grid grid-cols-3 gap-2 divide-x bg-white rounded-md rounded-tl-none">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 divide-y sm:divide-x bg-white rounded-md rounded-tl-none">
       <div className={`col-span-2 ${json.className}`} key={json.name}>
         {renderFields(json.fields)}
       </div>

@@ -39,11 +39,26 @@ body{
   textarea::placeholder {
     @apply text-gray-400 text-xs;
   }
+
+  table {
+    @apply w-full table-auto rounded;
+
+    th {
+      @apply font-semibold text-xs p-2 bg-gray-50
+    }
+    td {
+      @apply p-1
+    }
+  }
+
+  table, th, tr, td {
+    @apply border;
+  }
 }
 
 @layer components {
   .btn-form-type {
-    @apply px-6 py-2 text-sm font-medium rounded-md rounded-b-none transition-colors duration-200 mr-1 text-primary hover:bg-primary/5;
+    @apply px-6 py-2 text-xs sm:text-sm font-medium rounded-md rounded-b-none transition-colors duration-200 mr-1 text-primary hover:bg-primary/5;
   }
 
   .btn-form-type.active {
@@ -72,6 +87,17 @@ body{
 
   .radio-btn:checked + .radio-label {
     @apply bg-primary text-white;
+  }
+
+  .btn-table-action {
+    @apply w-full border py-1 flex items-center justify-center hover:!text-white rounded transition-all ease-in-out duration-500;
+
+    &.add {
+      @apply bg-green-500/20 border-green-500 text-green-500 hover:bg-green-600
+    }
+    &.remove {
+      @apply bg-red-500/20 border-red-500 text-red-500 hover:bg-red-500
+    }
   }
 }
 

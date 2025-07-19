@@ -3,7 +3,14 @@ export interface IFormTypes {
   value: string;
 }
 
+export type IThead = {
+  label: string;
+  name: string;
+  element: IElements
+} & IField
+
 export type IElements =
+  | "add-more-table"
   | "button"
   | "div"
   | "input"
@@ -18,6 +25,7 @@ export interface IBase {
   className?: string;
   element: IElements;
   required?: boolean;
+  visibilityCondition?: string;
 }
 export interface ILabel {
   name: string;
@@ -26,8 +34,8 @@ export interface ILabel {
   required?: boolean;
 }
 
-export interface IDiv extends IBase{
-  fields: IField[]
+export interface IDiv extends IBase {
+  fields: IField[];
 }
 export interface IText extends IBase {
   element: "text";
@@ -86,14 +94,24 @@ export interface ISingleSelect extends IBase {
   element: "single-select";
   label?: string;
   value?: string | number;
-  options: IOption[];
+  options?: IOption[];
   placeholder?: string;
   containerClassName?: string;
   labelClassName?: string;
+  endPoint?: string
   onChange?: (value: string | number) => void;
 }
 
+export interface IAddMoreTable extends IBase {
+  element: "add-more-table";
+  thead: IThead[];
+  tbody?: Record<string, any>[];
+  onChange?: (value: Record<string, any>[]) => void;
+  containerClassName?: string;
+}
+
 export type IField =
+  | IAddMoreTable
   | IButton
   | IDiv
   | IInput

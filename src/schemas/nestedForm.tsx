@@ -2,7 +2,7 @@ import { IJSON } from "../utils/types";
 
 export const nestedForm = (): IJSON => ({
   name: "nested_form",
-  className: "w-full bg-white rounded p-6 space-y-4",
+  className: "w-full bg-white rounded p-4 sm:p-6 space-y-4",
   fields: [
     {
       name: "heading",
@@ -13,11 +13,11 @@ export const nestedForm = (): IJSON => ({
     {
       name: "form-container",
       element: "div",
-      className: "rounded border p-4 space-y-4",
+      className: "rounded border p-2 sm:p-4 space-y-2 sm:space-y-4",
       fields: [
         {
           name: "primary",
-          className: "border rounded p-4 space-y-2",
+          className: "border rounded p-2 sm:p-4 space-y-2",
           element: "div",
           fields: [
             {
@@ -28,7 +28,7 @@ export const nestedForm = (): IJSON => ({
             {
               name: "primary_details_container",
               element: "div",
-              className: "grid grid-cols-6 gap-2 gap-y-5",
+              className: "flex flex-col sm:grid sm:grid-cols-6 gap-2 gap-y-3 sm:gap-y-5",
               fields: [
                 {
                   name: "full_name",
@@ -71,7 +71,7 @@ export const nestedForm = (): IJSON => ({
         },
         {
           name: "contact",
-          className: "border rounded p-4 space-y-2",
+          className: "border rounded p-2 sm:p-4 space-y-2",
           element: "div",
           fields: [
             {
@@ -82,7 +82,7 @@ export const nestedForm = (): IJSON => ({
             {
               name: "primary_details_container",
               element: "div",
-              className: "grid grid-cols-6 gap-2 gap-y-5",
+              className: "flex flex-col sm:grid sm:grid-cols-6 gap-2 gap-y-3 sm:gap-y-5",
               fields: [
                 {
                   name: "email",
@@ -146,7 +146,7 @@ export const nestedForm = (): IJSON => ({
     {
       name: "btns",
       element: "div",
-      className: "flex gap-1 justify-end items-center *:basis-1/6",
+      className: "flex flex-col sm:flex-row gap-3 sm:gap-1 sm:justify-end sm:items-center *:sm:basis-1/6",
       fields: [
         {
           name: "reset",

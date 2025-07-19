@@ -2,7 +2,7 @@ import { IJSON } from "../utils/types";
 
 export const basicForm = (): IJSON => ({
   name: "basic_form",
-  className: "w-full grid grid-cols-6 gap-2 gap-y-5 bg-white rounded p-6",
+  className: "w-full flex flex-col sm:grid sm:grid-cols-6 gap-2 gap-y-3 sm:gap-y-5 bg-white rounded p-4 sm:p-6",
   fields: [
     {
       name: "heading",

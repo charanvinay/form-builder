@@ -35,6 +35,36 @@ const validateForm = ({
   return inValidLabel;
 };
 
+const makeApiCall = async ({ endPoint }: { endPoint: string }) => {
+  try {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com${endPoint}`
+    );
+    const data = await response.json();
+    if (!Array.isArray(data)) return { status: false, data: [] };
+    return { status: true, data };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const jsCodeExecutor = ({
+  code,
+  state,
+}: {
+  code: string;
+  state: Record<string, any>;
+}) => {
+  try {
+    const func = new Function("state", code);
+    return func(state);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const Utils = {
+  jsCodeExecutor,
+  makeApiCall,
   validateForm,
 };

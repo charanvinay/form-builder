@@ -1,5 +1,7 @@
-import { ISingleSelect } from "../utils/types";
+import { useCallback, useEffect, useState } from "react";
+import { IOption, ISingleSelect } from "../utils/types";
 import Label from "./Label";
+import { Utils } from "../utils";
 
 const SingleSelect = (props: ISingleSelect) => {
   const {
@@ -10,10 +12,35 @@ const SingleSelect = (props: ISingleSelect) => {
     value,
     className = "",
     placeholder = "",
-    options = [],
+    endPoint = "",
     containerClassName = "",
     labelClassName = "",
   } = props;
+
+  const [options, setOptions] = useState<IOption[]>([]);
+
+  const fetchOptions = useCallback(async () => {
+    try {
+      const response = await Utils.makeApiCall({ endPoint });
+      if (response?.status) {
+        setOptions(() =>
+          response.data.map((option) => ({
+            value: option.id,
+            label: option.name,
+          }))
+        );
+      }
+    } catch (error) {}
+  }, [endPoint]);
+
+  useEffect(() => {
+    if (endPoint) {
+      fetchOptions();
+    } else {
+      setOptions([...(props.options || [])]);
+    }
+  }, [fetchOptions, props.options, endPoint]);
+
   return (
     <div key={name} className={containerClassName}>
       <Label
